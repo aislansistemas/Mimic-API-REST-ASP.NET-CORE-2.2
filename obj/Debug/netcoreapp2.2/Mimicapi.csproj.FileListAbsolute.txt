@@ -1,0 +1,16 @@
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\appsettings.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Mimicapi.deps.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Mimicapi.runtimeconfig.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Mimicapi.runtimeconfig.dev.json
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Mimicapi.dll
+D:\asp.net core\Mimicapi\bin\Debug\netcoreapp2.2\Mimicapi.pdb
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.csprojAssemblyReference.cache
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.RazorAssemblyInfo.cache
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.RazorAssemblyInfo.cs
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.AssemblyInfoInputs.cache
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.AssemblyInfo.cs
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.RazorTargetAssemblyInfo.cache
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.dll
+D:\asp.net core\Mimicapi\obj\Debug\netcoreapp2.2\Mimicapi.pdb
