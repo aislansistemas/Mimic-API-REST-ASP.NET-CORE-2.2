@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mimicapi.Contenxt;
 using Mimicapi.Helpers;
 using Mimicapi.Models;
+using Mimicapi.Models.DTO;
 using Mimicapi.Repositories.Contracts;
 using Newtonsoft.Json;
 using System;
@@ -17,10 +19,11 @@ namespace Mimicapi.Controllers
     public class PalavrasController : ControllerBase
     {
         private readonly IPalavraRepositoriy _repository;
-
-        public PalavrasController(IPalavraRepositoriy repo)
+        private readonly IMapper _mapper; 
+        public PalavrasController(IPalavraRepositoriy repo, IMapper mapper)
         {
-            _repository = repo;  
+            _repository = repo;
+            _mapper = mapper;
         }
         [HttpGet]
         [Route("")]
@@ -44,7 +47,13 @@ namespace Mimicapi.Controllers
             var obj = _repository.ObterId(id);
             if (obj == null)
                 return NotFound();
-            return Ok(obj);
+            PalavraDTO palavraDTO = _mapper.Map<Palavra, PalavraDTO>(obj);
+            palavraDTO.Links = new List<LinkDTO>();
+            palavraDTO.Links.Add(
+                new LinkDTO("self", $"https://localhost:44379/api/palavras/{palavraDTO.Id}","GET")
+                );
+            
+            return Ok(palavraDTO);
         }
         [HttpPost]
         [Route("")]

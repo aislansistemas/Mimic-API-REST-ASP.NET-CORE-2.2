@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Mimicapi.Contenxt;
 using Mimicapi.Repositories;
 using Mimicapi.Repositories.Contracts;
+using AutoMapper;
+using Mimicapi.Helpers;
 
 namespace Mimicapi
 {
@@ -26,7 +28,13 @@ namespace Mimicapi
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   //automapper configuração
+            var config = new MapperConfiguration(cfg =>
+            {
+               cfg.AddProfile(new DTOMapperProfile());
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddDbContext<MimicContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
