@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Mimicapi.Contenxt;
 using Mimicapi.Helpers;
 using Mimicapi.Models;
+using Mimicapi.Repositories.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,77 +16,62 @@ namespace Mimicapi.Controllers
     [Route("api/palavras")]
     public class PalavrasController : ControllerBase
     {
-        private readonly MimicContext _banco;
+        private readonly IPalavraRepositoriy _repository;
 
-        public PalavrasController(MimicContext mimic)
+        public PalavrasController(IPalavraRepositoriy repo)
         {
-            _banco = mimic;  
+            _repository = repo;  
         }
         [HttpGet]
         [Route("")]
         public ActionResult ObterTodas([FromQuery]PalavraUrlQuery query)
-        {   
-            var item = _banco.Palavras.AsEnumerable();
-            if (query.data.HasValue)
+        {
+            var item = _repository.ObterPalavras(query);
+
+            if (query.pagnumero > item.Paginacao.TotalPaginas)
             {
-                item = item.Where(a => a.Criado > query.data.Value || a.Atualizado> query.data.Value);
+                return NotFound();
             }
-            if (query.pagnumero.HasValue)
-            {
-                var quantidaderegistro = item.Count();
-                item = item.Skip((query.pagnumero.Value-1)*query.pagregistro.Value).Take(query.pagregistro.Value);
-                var paginacao = new Paginacao();
-                paginacao.NumeroPagina = query.pagnumero.Value;
-                paginacao.RegistroPorPagina = query.pagregistro.Value;
-                paginacao.TotalRegistros=quantidaderegistro;
-                paginacao.TotalPaginas=(int) Math.Ceiling((double)quantidaderegistro / query.pagregistro.Value);
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginacao));
-                if (query.pagnumero > paginacao.TotalPaginas)
-                {
-                    return NotFound();
-                }
-            }
-            return Ok(item);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(item.Paginacao));
+
+            return Ok(item.ToList());
         }
         [HttpGet]
         [Route("{id}")]
         public ActionResult Obter(int id)
         {
-            var obj = _banco.Palavras.Find(id);
+            var obj = _repository.ObterId(id);
             if (obj == null)
                 return NotFound();
-            return Ok();
+            return Ok(obj);
         }
         [HttpPost]
         [Route("")]
         public ActionResult Cadastrar([FromBody]Palavra palavra)
         {
-            _banco.Palavras.Add(palavra);
-            _banco.SaveChanges();
+            _repository.Cadastrar(palavra);
             return Created($"api/palavras/{palavra.Id}",palavra);
         }
         [HttpPut]
         [Route("{id}")]
         public ActionResult Atualizar(int id,[FromBody]Palavra palavra)
         {
-            var obj = _banco.Palavras.AsNoTracking().FirstOrDefault(a => a.Id == id);
+            var obj = _repository.ObterId(id);
             if (obj == null)
                 return NotFound();
             palavra.Id = id;
-            _banco.Palavras.Update(palavra);
-            _banco.SaveChanges();
+            _repository.Atualizar(palavra);
             return Ok();
         }
         [HttpDelete]
         [Route("{id}")]
         public ActionResult Deletar(int id)
         {
-            var palavra = _banco.Palavras.Find(id);
+            var palavra = _repository.ObterId(id);
             if (palavra == null)
                 return NotFound();
-            palavra.Ativo = false;
-            _banco.Palavras.Update(palavra);
-            _banco.SaveChanges();
+            _repository.Deletar(id);
             return NoContent();
         }
         

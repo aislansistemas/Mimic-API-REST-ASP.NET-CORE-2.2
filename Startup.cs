@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mimicapi.Contenxt;
+using Mimicapi.Repositories;
+using Mimicapi.Repositories.Contracts;
 
 namespace Mimicapi
 {
@@ -28,7 +30,8 @@ namespace Mimicapi
 
             services.AddDbContext<MimicContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
+            services.AddScoped<IPalavraRepositoriy, PalavraRepository>();
             services.AddMvc();
         }
 
