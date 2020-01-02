@@ -4,18 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mimicapi.Contenxt;
 using Mimicapi.Helpers;
-using Mimicapi.Models;
-using Mimicapi.Models.DTO;
-using Mimicapi.Repositories.Contracts;
+using Mimicapi.v1.Models;
+using Mimicapi.v1.Models.DTO;
+using Mimicapi.v1.Repositories.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mimicapi.Controllers
+namespace Mimicapi.v1.Controllers
 {
-    [Route("api/palavras")]
+    [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0", Deprecated = true)]
+    [ApiVersion("1.1")]
     public class PalavrasController : ControllerBase
     {
         private readonly IPalavraRepositoriy _repository;
@@ -25,6 +28,8 @@ namespace Mimicapi.Controllers
             _repository = repo;
             _mapper = mapper;
         }
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("1.1")]
         [HttpGet("",Name ="ObterTodas")]
         public ActionResult ObterTodas([FromQuery]PalavraUrlQuery query)
         {
@@ -58,6 +63,8 @@ namespace Mimicapi.Controllers
             }
             return Ok(lista);
         }
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("1.1")]
         [HttpGet("{id}", Name = "Obter")]
         public ActionResult Obter(int id)
         {
@@ -77,7 +84,8 @@ namespace Mimicapi.Controllers
 
             return Ok(palavraDTO);
         }
-
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("1.1")]
         [HttpPost]
         [Route("")]
         public ActionResult Cadastrar([FromBody]Palavra palavra)
@@ -99,6 +107,8 @@ namespace Mimicapi.Controllers
                 );
             return Created($"api/palavras/{palavra.Id}", palavra);
         }
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("1.1")]
         [HttpPut("{id}",Name ="Atualizar")]
         public ActionResult Atualizar(int id,[FromBody]Palavra palavra)
         {
@@ -124,6 +134,7 @@ namespace Mimicapi.Controllers
                 );
             return Ok();
         }
+        [MapToApiVersion("1.1")]
         [HttpDelete("{id}",Name ="Deletar")]
         public ActionResult Deletar(int id)
         {

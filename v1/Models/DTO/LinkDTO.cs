@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mimicapi.Models.DTO
+namespace Mimicapi.v1.Models.DTO
 {
     public class LinkDTO
     {

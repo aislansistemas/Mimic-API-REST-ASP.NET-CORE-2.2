@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Mimicapi.v1.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mimicapi.Models.DTO
+namespace Mimicapi.v1.Models.DTO
 {
     public abstract class BaseDTO
     {

@@ -10,10 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mimicapi.Contenxt;
-using Mimicapi.Repositories;
-using Mimicapi.Repositories.Contracts;
+using Mimicapi.v1.Repositories;
+using Mimicapi.v1.Repositories.Contracts;
 using AutoMapper;
 using Mimicapi.Helpers;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Mimicapi
 {
@@ -38,7 +39,22 @@ namespace Mimicapi
 
             services.AddDbContext<MimicContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            services.AddApiVersioning(cfg=> { 
+                cfg.ReportApiVersions = true;
+                cfg.AssumeDefaultVersionWhenUnspecified = true;
+                cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+            });
+
+            services.AddSwaggerGen(cfg =>
+            {
+                cfg.ResolveConflictingActions(apidescription => apidescription.First());
+                cfg.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info()
+                {
+                    Title="Mimicapi-v1",
+                    Version="v1"
+                });
+            });
             services.AddScoped<IPalavraRepositoriy, PalavraRepository>();
             services.AddMvc();
         }
@@ -53,6 +69,11 @@ namespace Mimicapi
 
             app.UseStatusCodePages();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(cfg=>{
+                cfg.SwaggerEndpoint("/swagger/v1/swagger.json", "Mimicapi");
+                cfg.RoutePrefix = string.Empty;
+            });
         }
     }
 }

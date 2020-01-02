@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mimicapi.Contenxt;
 using Mimicapi.Helpers;
-using Mimicapi.Models;
-using Mimicapi.Repositories.Contracts;
+using Mimicapi.v1.Models;
+using Mimicapi.v1.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mimicapi.Repositories
+namespace Mimicapi.v1.Repositories
 {
     public class PalavraRepository : IPalavraRepositoriy
     {

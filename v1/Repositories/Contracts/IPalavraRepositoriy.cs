@@ -1,11 +1,11 @@
 ﻿using Mimicapi.Helpers;
-using Mimicapi.Models;
+using Mimicapi.v1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mimicapi.Repositories.Contracts
+namespace Mimicapi.v1.Repositories.Contracts
 {
     public interface IPalavraRepositoriy
     {
