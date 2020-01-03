@@ -6,6 +6,7 @@ D:\asp.net core\MimicApi\bin\Debug\netcoreapp2.2\Mimicapi.runtimeconfig.json
 D:\asp.net core\MimicApi\bin\Debug\netcoreapp2.2\Mimicapi.runtimeconfig.dev.json
 D:\asp.net core\MimicApi\bin\Debug\netcoreapp2.2\Mimicapi.dll
 D:\asp.net core\MimicApi\bin\Debug\netcoreapp2.2\Mimicapi.pdb
+D:\asp.net core\MimicApi\bin\Debug\netcoreapp2.2\Mimicapi.xml
 D:\asp.net core\MimicApi\obj\Debug\netcoreapp2.2\Mimicapi.csprojAssemblyReference.cache
 D:\asp.net core\MimicApi\obj\Debug\netcoreapp2.2\Mimicapi.RazorAssemblyInfo.cache
 D:\asp.net core\MimicApi\obj\Debug\netcoreapp2.2\Mimicapi.RazorAssemblyInfo.cs

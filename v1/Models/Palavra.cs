@@ -10,6 +10,7 @@ namespace Mimicapi.v1.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="{0} obrigatório")]
+        [MaxLength(150)]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]

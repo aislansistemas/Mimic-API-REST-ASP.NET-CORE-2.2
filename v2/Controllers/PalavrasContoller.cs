@@ -16,6 +16,11 @@ namespace Mimicapi.v2.Controllers
         [ApiVersion("2.0")]
         public class PalavrasController : ControllerBase
         {
+            /// <summary>
+            /// Operação lista todas as palavras existentes no banco de dados.
+            /// </summary>
+            /// <param></param>
+            /// <returns>Listagem de palavrasa</returns>
             [HttpGet("", Name = "ObterTodas")]
             public string ObterTodas()
             {

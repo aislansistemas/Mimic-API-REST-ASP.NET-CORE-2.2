@@ -28,6 +28,12 @@ namespace Mimicapi.v1.Controllers
             _repository = repo;
             _mapper = mapper;
         }
+
+        /// <summary>
+        /// Operação lista todas as palavras existentes no banco de dados.
+        /// </summary>
+        /// <param name="query">Filtros de pesquisa</param>
+        /// <returns>Listagem de palavrasa</returns>
         [MapToApiVersion("1.0")]
         [MapToApiVersion("1.1")]
         [HttpGet("",Name ="ObterTodas")]
@@ -63,6 +69,12 @@ namespace Mimicapi.v1.Controllers
             }
             return Ok(lista);
         }
+
+        /// <summary>
+        /// Operação que pega uma única palavra do banco de dados.
+        /// </summary>
+        /// <param name="id">Código identificador da palavra</param>
+        /// <returns>Um objeto de palavra</returns>
         [MapToApiVersion("1.0")]
         [MapToApiVersion("1.1")]
         [HttpGet("{id}", Name = "Obter")]
@@ -84,6 +96,12 @@ namespace Mimicapi.v1.Controllers
 
             return Ok(palavraDTO);
         }
+
+        /// <summary>
+        /// Operação que realiza o cadastro da palavra
+        /// </summary>
+        /// <param name="palavra">Objeto referente a Entidade Palavra</param>
+        /// <returns>Um objeto palavra com seu respectivo id</returns>
         [MapToApiVersion("1.0")]
         [MapToApiVersion("1.1")]
         [HttpPost]
@@ -107,6 +125,13 @@ namespace Mimicapi.v1.Controllers
                 );
             return Created($"api/palavras/{palavra.Id}", palavra);
         }
+
+        /// <summary>
+        /// Operação que realiza a substituição de dados de uma palavra específica
+        /// </summary>
+        /// <param name="id">Código identificador da palavra a ser alterada</param>
+        /// <param name="palavra">Objeto palavra com dados para alteração</param>
+        /// <returns></returns>
         [MapToApiVersion("1.0")]
         [MapToApiVersion("1.1")]
         [HttpPut("{id}",Name ="Atualizar")]
@@ -134,6 +159,12 @@ namespace Mimicapi.v1.Controllers
                 );
             return Ok();
         }
+
+        /// <summary>
+        /// Operação que desativa uma palavra do sistema
+        /// </summary>
+        /// <param name="id">Código identificador da palavra</param>
+        /// <returns></returns>
         [MapToApiVersion("1.1")]
         [HttpDelete("{id}",Name ="Deletar")]
         public ActionResult Deletar(int id)
